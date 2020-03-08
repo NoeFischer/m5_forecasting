@@ -1,3 +1,6 @@
+.DS_Store
 .ipynb_checkpoints
 data/
+models/
+submissions/
 __pycache__/

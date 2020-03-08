@@ -1,13 +1,21 @@
+import pandas as pd
+
+
+### LOAD DATA ###
+def load_raw_data(base_path):
+    # Load data
+    calendar = pd.read_csv(base_path + 'calendar.csv')
+    sell_prices = pd.read_csv(base_path + 'sell_prices.csv')
+    sales = pd.read_csv(base_path + 'sales_train_validation.csv')
+    return calendar, sell_prices, sales
+
 ### CLEAN DATA ###
-def clean_data(df:object, id_vars:list, time_var:str, target:str, ret_cols:list):
+def clean_data(df:object, id_vars:list, time_var:str, target:str):
     # Lowercase columns
     df.columns = df.columns.str.lower()
     # Tidy Data
     df = df.melt(id_vars=id_vars, var_name=time_var, value_name=target)
     # Convert time var
-    df[time_var] = df[time_var].str.extract('(\d+)', expand=False).astype(int)
-    # Subset columns
-    df = df[ret_cols]
     return df
 
 ### CREATE TRAIN AND VALIDATION SET ###
